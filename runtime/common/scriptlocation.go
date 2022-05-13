@@ -37,20 +37,14 @@ func NewScriptLocation(gauge MemoryGauge, script []byte) ScriptLocation {
 }
 
 func (l ScriptLocation) ID() LocationID {
-	return l.MeteredID(nil)
-}
-
-func (l ScriptLocation) MeteredID(memoryGauge MemoryGauge) LocationID {
-	return NewMeteredLocationID(
-		memoryGauge,
+	return NewLocationID(
 		ScriptLocationPrefix,
 		l.String(),
 	)
 }
 
-func (l ScriptLocation) TypeID(memoryGauge MemoryGauge, qualifiedIdentifier string) TypeID {
-	return NewMeteredTypeID(
-		memoryGauge,
+func (l ScriptLocation) TypeID(qualifiedIdentifier string) TypeID {
+	return NewTypeID(
 		ScriptLocationPrefix,
 		l.String(),
 		qualifiedIdentifier,

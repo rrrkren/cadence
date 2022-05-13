@@ -14523,7 +14523,7 @@ func (v *CompositeValue) TypeID() common.TypeID {
 		if location == nil {
 			return common.TypeID(qualifiedIdentifier)
 		}
-		v.typeID = location.TypeID(nil, qualifiedIdentifier)
+		v.typeID = location.TypeID(qualifiedIdentifier)
 	}
 	return v.typeID
 }

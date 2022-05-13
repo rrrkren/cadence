@@ -862,7 +862,7 @@ func (interpreter *Interpreter) SetAllInterpreters(allInterpreters map[common.Lo
 
 	// Register self
 	if interpreter.Location != nil {
-		locationID := interpreter.Location.MeteredID(interpreter.memoryGauge)
+		locationID := interpreter.Location.ID()
 		interpreter.allInterpreters[locationID] = interpreter
 	}
 }
@@ -2607,7 +2607,7 @@ func (interpreter *Interpreter) ensureLoadedWithLocationHandler(
 	loadLocation func() Import,
 ) *Interpreter {
 
-	locationID := location.MeteredID(interpreter.memoryGauge)
+	locationID := location.ID()
 
 	// If a sub-interpreter already exists, return it
 
@@ -4183,7 +4183,7 @@ func (interpreter *Interpreter) getElaboration(location common.Location) *sema.E
 
 	inter := interpreter.EnsureLoaded(location)
 
-	locationID := location.MeteredID(interpreter.memoryGauge)
+	locationID := location.ID()
 
 	subInterpreter := inter.allInterpreters[locationID]
 	if subInterpreter == nil || subInterpreter.Program == nil {
@@ -4261,7 +4261,7 @@ func (interpreter *Interpreter) getInterfaceType(location common.Location, quali
 		return nil, InterfaceMissingLocationError{QualifiedIdentifier: qualifiedIdentifier}
 	}
 
-	typeID := location.TypeID(interpreter, qualifiedIdentifier)
+	typeID := location.TypeID(qualifiedIdentifier)
 
 	elaboration := interpreter.getElaboration(location)
 	if elaboration == nil {

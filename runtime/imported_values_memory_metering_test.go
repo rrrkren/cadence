@@ -658,7 +658,7 @@ func TestScriptDecodedLocationMetering(t *testing.T) {
 		},
 		{
 			MemoryKind: common.MemoryKindRawString,
-			Weight:     3 + 1 + 106 + 56, // 106 is for tokens, 56 is for location ID gen
+			Weight:     3 + 1 + 106, // 106 is for tokens
 			Name:       "string",
 			Location:   common.StringLocation("abc"),
 		},
