@@ -106,6 +106,9 @@ type Runtime interface {
 	// ReadLinked dereferences the path and returns the value stored at the target
 	//
 	ReadLinked(address common.Address, path cadence.Path, context Context) (cadence.Value, error)
+
+	// Storage returns the storage system.
+	Storage(context Context) *Storage
 }
 
 var typeDeclarations = append(
@@ -3131,6 +3134,11 @@ func (r *interpreterRuntime) ReadStored(
 		},
 		context,
 	)
+}
+
+func (r *interpreterRuntime) Storage(context Context) *Storage {
+	memoryGauge, _ := context.Interface.(common.MemoryGauge)
+	return NewStorage(context.Interface, memoryGauge)
 }
 
 func (r *interpreterRuntime) ReadLinked(
